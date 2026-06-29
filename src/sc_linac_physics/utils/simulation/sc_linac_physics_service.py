@@ -478,6 +478,12 @@ _REPEATER_POLL_S = 0.05
 def main():
     os.environ.setdefault("EPICS_CAS_AUTO_BEACON_ADDR_LIST", "no")
     os.environ.setdefault("EPICS_CAS_BEACON_ADDR_LIST", "127.0.0.1")
+
+    #Enable mock archiver for offline development and testing:
+    from sc_linac_physics.utils.archiver import start_mock_archiver
+    start_mock_archiver()
+    print("Mock archiver ready (historical data available)")
+
     service = SCLinacPhysicsService()
     _, run_options = ioc_arg_parser(
         default_prefix="", desc="Simulated CM Cavity Service"
